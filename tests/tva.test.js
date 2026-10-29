@@ -8,6 +8,10 @@ test('le taux reduit de 5,5 % fonctionne', () => {
   expect(calculerTTC(10, 5.5)).toBe(10.55);
 });
 
+test('le taux reduit de 5,5 % fonctionne', () => {
+  expect(calculerTTC(10, 10)).toBe(11);
+});
+
 test('un prix negatif est refuse', () => {
   expect(() => calculerTTC(-5)).toThrow('Prix invalide');
 });
