@@ -22,3 +22,18 @@ test('GET /prix refuse un prix negatif', async () => {
   const res = await request(app).get('/prix?ht=-1');
   expect(res.status).toBe(400);
 });
+
+test('GET /remise applique la remise', async () => {
+  const res = await request(app)
+    .get('/remise?prix=200&pourcentage=25');
+
+  expect(res.body.prixRemise).toBe(150);
+});
+
+test('GET /remise refuse une remise invalide', async () => {
+  const res = await request(app)
+    .get('/remise?prix=200&pourcentage=120');
+
+  expect(res.status).toBe(400);
+  expect(res.body.erreur).toBe('Remise invalide');
+});
